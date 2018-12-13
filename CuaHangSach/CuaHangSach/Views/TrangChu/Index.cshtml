@@ -1,0 +1,99 @@
+﻿@model PagedList.IPagedList<CuaHangSach.Models.SACH>
+@using PagedList.Mvc;
+@using CuaHangSach.Models;
+
+@{
+    ViewBag.Title = ViewBag.TieuDe;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-6 text-center">
+        <form action="" method="get" class="form-inline">
+            <input type="text" class="form-control form-control-sm" name="key" placeholder="Nhập sách cần tìm..." />
+            <input type="submit" value="Tìm kiếm" class="btn btn-sm btn-info" />
+        </form>
+    </div>
+    <div class="col-md-2 text-center">
+        <a href="GioHang" class="btn btn-warning">Giỏ Hàng <span class="badge">0</span></a>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-3" style="border-right: 1px solid black;">
+        <span style="font-weight:bold; margin-bottom:10px;color: cornflowerblue;">Danh Sách Loại</span>
+        <br />
+        <br />
+        <ul class="list-group" style="">
+            @foreach (LOAI itemLoai in ViewBag.lstLoai)
+            {
+                <li class="list-group-item" style="border-radius: 0px;">
+                    <a href="?maloai=@itemLoai.MaLoai" class="text-success" style="font-weight: bold;">@itemLoai.TenLoai</a>
+                    <span class="badge">@{ Output.Write(new Function().sumSachTheoLoai(itemLoai.MaLoai)); }</span>
+            </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-9" >
+        <table class="table table-bordered">
+            <tbody>
+                @if (Model.Count() == 0)
+                {
+                    Output.WriteLine("Không có kết quả nào !");
+                }
+                else
+                {
+                    var t = Model.ToList();
+                    int n = t.Count();
+                    SACH s = null;
+                    for (int i = 0; i < n;)
+                    {
+                            <tr class="row">
+                                @for (int j = 0; j < 3; j++)
+                                {
+                                    if (i < n)
+                                    {
+                                        s = t[i];
+                                        <td class="col-4 col-sm-4 text-center">
+                                            <div>
+                                                <div>
+                                                    <img class="" style="width: 160px;height: 160px;border-radius: 5px; margin-bottom:10px;" src="~/Image/Book/@s.Anh">
+                                                </div>
+                                                <div style="height: 40px;text-transform: uppercase; color: #CC0000; font-weight: bold;">
+                                                    @s.TenSach
+                                                </div>
+                                                <div style="font-weight: bold;">
+                                                    Tác giả:
+                                                    <span style="color: blue;">@s.TacGia</span>
+                                                </div>
+                                                <div style="font-weight: bold;">
+                                                    Giá Sách:
+                                                    <span style="color: red;">@s.Gia</span>
+                                                </div>
+                                                <div>
+                                                    <form action="" method="post">
+                                                        <input style="border-radius: 4px;" type="image" src="~/Image/Icon/mua.jpg" />
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    i++;
+                                }
+                            </tr>
+                        }
+                        }
+                
+            </tbody>
+        </table>
+        <!-- Thêm mã phân trang -->
+        <br />
+        <div class="row text-center">
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",new { page }))
+        </div>
+        <!-- Kết thúc -->
+    </div>
+</div>
