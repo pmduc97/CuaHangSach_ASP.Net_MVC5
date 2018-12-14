@@ -178,6 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DonHangCuaBanController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
@@ -241,7 +242,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\Icon\blogger.png" />
     <Content Include="Image\Icon\book_icon.png" />
+    <Content Include="Image\Icon\facebook.png" />
     <Content Include="Image\Icon\mua.jpg" />
     <Content Include="Models\CuaHangSach.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -330,6 +333,8 @@
     <Content Include="Views\QuanLyKhachHang\Edit.cshtml" />
     <Content Include="Views\QuanLyKhachHang\Index.cshtml" />
     <Content Include="Views\KhachHang\DangKy.cshtml" />
+    <Content Include="Views\DonHangCuaBan\Index.cshtml" />
+    <Content Include="Views\DonHangCuaBan\ChiTiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

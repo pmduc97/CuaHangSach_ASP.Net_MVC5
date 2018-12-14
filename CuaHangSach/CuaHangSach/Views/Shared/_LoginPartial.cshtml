@@ -5,15 +5,15 @@
             KHACHHANG kh = (KHACHHANG)Session["KhachHang"];
     <ul class="nav navbar-nav navbar-right">
         <li>
-            <a>Chào: @kh.TenKhachHang</a>
+            <a><span class="glyphicon glyphicon-user"></span> Chào: @kh.TenKhachHang</a>
         </li>
-        <li><a href="/KhachHang/DangXuat">Đăng xuất</a></li>
+        <li><a href="/KhachHang/DangXuat"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
     </ul>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="/KhachHang/DangKy">Đăng ký</a></li>
-        <li><a href="/KhachHang/DangNhap">Đăng nhập</a></li>
+        <li><a href="/KhachHang/DangKy"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</a></li>
+        <li><a href="/KhachHang/DangNhap"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
     </ul>
 }

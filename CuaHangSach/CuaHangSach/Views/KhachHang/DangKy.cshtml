@@ -5,6 +5,20 @@
 }
 
 <h2>Đăng ký</h2>
+@{ 
+    if(ViewBag.KiemTra != null)
+    {
+        string kiemtra = ViewBag.KiemTra;
+        if (kiemtra.Equals("-1"))
+        {
+            Output.WriteLine("Tài khoản đã tồn tại");
+        }
+        else
+        {
+            Output.WriteLine("Đăng ký tài khoản thành công");
+        }
+    }
+}
 <form action="" method="post">
     @Html.AntiForgeryToken()
     <table class="table table-bordered">
@@ -33,9 +47,36 @@
             </td>
         </tr>
         <tr>
+            <th>Email</th>
+            <td>
+                <input class="form-control" name="email" value="" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <th>Ngày sinh</th>
+            <td>
+                <input class="form-control" name="ngaysinh" value="1997-01-01" type="date" />
+            </td>
+        </tr>
+        <tr>
+            <th>Giới tính</th>
+            <td>
+                <select name="gioitinh" class="form-control">
+                    <option value="0">Nam</option>
+                    <option value="1">Nữ</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Địa Chỉ</th>
+            <td>
+                <input class="form-control" name="quequan" value="" type="text" />
+            </td>
+        </tr>
+        <tr>
             <th></th>
             <td>
-                <input class="btn btn-info" name="dangnhap" value="Đăng ký" type="submit" />
+                <input class="btn btn-info" name="dangky" value="Đăng ký" type="submit" />
             </td>
         </tr>
     </table>

@@ -17,14 +17,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Cửa Hàng Sách", "Index", "TrangChu", new { area = "" }, new { @class = "navbar-brand" })
+                
+                <a class="navbar-brand" href="/TrangChu"><span class="glyphicon glyphicon-book"></span> Cửa Hàng Sách</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Trang Chủ", "Index", "TrangChu")</li>
-                    <li>@Html.ActionLink("Quản Lý Loại", "Index", "QuanLyLoai")</li>
-                    <li>@Html.ActionLink("Quản Lý Sách", "Index", "QuanLySach")</li>
-                    <li>@Html.ActionLink("Quản Lý Khách Hàng", "Index", "QuanLyKhachHang")</li>
+                    <li>
+                        <a href="/TrangChu"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a>
+                    </li>
+                    @{
+                        if (Session["KhachHang"] != null)
+                        {
+                            <li>
+                                <a href="/DonHangCuaBan"><span class="glyphicon glyphicon-usd"></span> Đơn Hàng Của Bạn</a>
+                            </li>
+                        }
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +42,13 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="text-align: center;">&copy; @DateTime.Now.Year - Cửa Hàng Sách</p>
+            <p style="text-align: center; font-weight:bold;">&copy; @DateTime.Now.Year - Cửa Hàng Sách
+            <br />
+            Phạm Minh Đức - pmduc97@gmail.com
+            <br />
+                <a href="http://fb.com/ducpham1997"><img src="~/Image/Icon/facebook.png" style="width:30px;height:30px;border-radius: 5px;" /></a> | 
+                <a href="https://pmduc.blogspot.com/"><img src="~/Image/Icon/blogger.png" style="width:30px;height:30px;border-radius: 5px;" /></a>
+            </p>
         </footer>
     </div>
 

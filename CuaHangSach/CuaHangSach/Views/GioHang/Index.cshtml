@@ -61,10 +61,21 @@
     <div class="col-md-4">
         <h3 style="font-weight:bold;color:red;">Tổng tiền: @tongtien VNĐ</h3>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         
     </div>
-    <div class="col-md-4">
-        <a style="margin-top:15px; float:right;" class="btn btn-warning">Đặt Hàng</a>
+    <div class="col-md-5">
+        @if(Session["KhachHang"] == null)
+        {
+            <span>Bạn cần đăng nhập để đặt hàng.  </span>
+            <a href="/KhachHang/DangNhap?next=GioHang" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
+            <a href = "/KhachHang/DangKy" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</a>
+        }
+        else
+        {
+            <a style="margin-top:15px; float:right;" href="/GioHang/DatHang" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span> Đặt Hàng</a>
+            <a style="margin-top:15px; float:right; margin-right:5px;" href="/TrangChu" class="btn btn-info"><span class="glyphicon glyphicon-usd"></span> Tiếp tục mua hàng</a>
+        }
+        
     </div>
 </div>

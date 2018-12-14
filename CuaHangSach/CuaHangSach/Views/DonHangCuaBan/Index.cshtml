@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CuaHangSach.Models.HOADON>
+@using CuaHangSach.Models;
+@{
+    ViewBag.Title = "Danh sách đơn hàng của bạn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Danh sách đơn hàng của bạn</h3>
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã hóa đơn</th>
+                            <th>Thời gian mua</th>
+                            <th>Tổng tiền</th>
+                            <th>Thanh toán</th>
+                        </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                    foreach (HOADON hd in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@hd.MaHoaDon</td>
+                            <td>@hd.ThoiGianMua</td>
+                            <td></td>
+                            @{ 
+                                if (hd.DaThanhToan)
+                                {
+                                    <td style="">Đã thanh toán</td>
+                                }
+                                else
+                                {
+                                    <td style="color:red;">Chưa thanh toán</td>
+                                }
+                            }
+                            <td>
+                                <a class="btn btn-sm btn-info" href="/DonHangCuaBan/ChiTiet?mahoadon=@hd.MaHoaDon">Chi tiết</a>
+                            </td>
+                        </tr>
+                                    i++;
+                                }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

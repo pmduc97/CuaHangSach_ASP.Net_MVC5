@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CuaHangSach.Models.View_HienThiHoaDon>
+@using CuaHangSach.Models;
+@{
+    ViewBag.Title = "Chi tiết hóa đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Chi tiết hóa đơn: @ViewBag.MaHoaDon</h3>
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên mặt hàng</th>
+                    <th>Giá</th>
+                    <th>Số lượng mua</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                    foreach (View_HienThiHoaDon hd in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@hd.TenSach</td>
+                            <td>@hd.Gia</td>
+                            <td>@hd.SoLuongMua</td>
+                            <td>@hd.ThanhTien</td>
+                        </tr>
+                     i++;
+                     }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
