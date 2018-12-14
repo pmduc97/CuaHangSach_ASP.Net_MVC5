@@ -28,6 +28,7 @@
             </thead>
             <tbody>
                 @{
+                    Function func = new Function();
                     int i = 1;
                     foreach (HOADON hd in Model)
                     {
@@ -35,7 +36,11 @@
                             <td>@i</td>
                             <td>@hd.MaHoaDon</td>
                             <td>@hd.ThoiGianMua</td>
-                            <td></td>
+                            <td>
+                                @{ 
+                                    Output.WriteLine(func.tongTien(hd.MaHoaDon));
+                                }
+                            </td>
                             @{ 
                                 if (hd.DaThanhToan)
                                 {

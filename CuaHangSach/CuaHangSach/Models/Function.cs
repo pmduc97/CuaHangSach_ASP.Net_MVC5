@@ -12,5 +12,18 @@ namespace CuaHangSach.Models
         {
             return db.SACHes.Where(p => p.MaLoai.Equals(maloai)).Count();
         }
+
+        public long tongTien(string mahoadon)
+        {
+            var t = db.CHITIETHOADONs.Where(p => p.MaHoaDon.Equals(mahoadon));
+            if(t.Count() == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return t.Sum(p => p.ThanhTien);
+            }
+        }
     }
 }

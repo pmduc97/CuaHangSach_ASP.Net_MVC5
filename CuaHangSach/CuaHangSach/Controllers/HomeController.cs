@@ -10,7 +10,7 @@ namespace CuaHangSach.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "TrangChu");
         }
 
         public ActionResult About()
