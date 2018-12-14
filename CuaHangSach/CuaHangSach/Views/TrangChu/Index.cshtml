@@ -5,6 +5,16 @@
 @{
     ViewBag.Title = ViewBag.TieuDe;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int sum = 0;
+    if(Session["GioHang"] == null)
+    {
+        sum = 0;
+    }
+    else
+    {
+        List<SACH> lstGioHang = (List<SACH>)Session["GioHang"];
+        sum = lstGioHang.Count();
+    }
 }
 <hr />
 <div class="row">
@@ -16,7 +26,7 @@
         </form>
     </div>
     <div class="col-md-2 text-center">
-        <a href="GioHang" class="btn btn-warning">Giỏ Hàng <span class="badge">0</span></a>
+        <a href="GioHang" class="btn btn-warning">Giỏ Hàng <span class="badge">@sum</span></a>
     </div>
 </div>
 <hr />
@@ -72,7 +82,17 @@
                                                     <span style="color: red;">@s.Gia</span>
                                                 </div>
                                                 <div>
-                                                    <form action="" method="post">
+                                                    <form action="TrangChu/ThemGio" method="post">
+                                                        @Html.AntiForgeryToken()
+                                                        
+                                                        <input name="MaSach" type="hidden" value="@s.MaSach" />
+                                                        <input name="TenSach" type="hidden" value="@s.TenSach" />
+                                                        <input name="SoLuong" type="hidden" value="1" />
+                                                        <input name="Gia" type="hidden" value="@s.Gia" />
+                                                        <input name="MaLoai" type="hidden" value="@s.MaLoai" />
+                                                        <input name="Anh" type="hidden" value="@s.Anh" />
+                                                        <input name="TacGia" type="hidden" value="@s.TacGia" />
+                                                        <input name="NgayNhap" type="hidden" value="@s.NgayNhap" />
                                                         <input style="border-radius: 4px;" type="image" src="~/Image/Icon/mua.jpg" />
                                                     </form>
                                                 </div>

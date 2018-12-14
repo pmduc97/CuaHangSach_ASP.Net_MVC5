@@ -1,0 +1,70 @@
+﻿@using CuaHangSach.Models;
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giỏ Hàng Của Bạn</h2>
+
+@{
+    if(Session["GioHang"] == null)
+    {
+        Session["GioHang"] = new List<SACH>();
+    }
+    List<SACH> lstSach = (List<SACH>)Session["GioHang"];
+    int i = 1;
+    long tongtien = 0;
+    }
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sách</th>
+                    <th>Giá</th>
+                    <th>Số lượng mua</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (SACH s in lstSach)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@s.TenSach</td>
+                        <td>@s.Gia</td>
+                        <td>
+                            <form class="form-inline" method="get" action="GioHang/CapNhat">
+                                <input name="soluong" style="width:70px; text-align:center;" type="number" value="@s.SoLuong" />
+                                <input name="masach" value="@s.MaSach" type="hidden" />
+                                <input name="capnhat" value="Cập nhật" type="submit" class="btn btn-sm btn-info" />
+                            </form>
+                            
+                        </td>
+                        <td>
+                            <form action="GioHang/Xoa" method="post">
+                                @Html.AntiForgeryToken()
+                                <input name="masach" value="@s.MaSach" type="hidden" />
+                                <input style="float:right;" name="xoa" value="Trả lại" class="btn btn-sm btn-danger" type="submit" />
+                            </form>
+                        </td>
+                    </tr>
+                    tongtien += s.Gia * s.SoLuong;
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <h3 style="font-weight:bold;color:red;">Tổng tiền: @tongtien VNĐ</h3>
+    </div>
+    <div class="col-md-4">
+        
+    </div>
+    <div class="col-md-4">
+        <a style="margin-top:15px; float:right;" class="btn btn-warning">Đặt Hàng</a>
+    </div>
+</div>

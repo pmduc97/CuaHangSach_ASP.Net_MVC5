@@ -1,22 +1,19 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
+@using CuaHangSach.Models;
+@if (Session["KhachHang"] != null)
+        {
+            KHACHHANG kh = (KHACHHANG)Session["KhachHang"];
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <a>Chào: @kh.TenKhachHang</a>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="/KhachHang/DangXuat">Đăng xuất</a></li>
     </ul>
-    }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li><a href="/KhachHang/DangKy">Đăng ký</a></li>
+        <li><a href="/KhachHang/DangNhap">Đăng nhập</a></li>
     </ul>
 }

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Đăng ký</h2>
+<form action="" method="post">
+    @Html.AntiForgeryToken()
+    <table class="table table-bordered">
+        <tr>
+            <th>Tài khoản</th>
+            <td>
+                <input class="form-control" name="taikhoan" value="" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <th>Mật khẩu</th>
+            <td>
+                <input class="form-control" name="matkhau" value="" type="password" />
+            </td>
+        </tr>
+        <tr>
+            <th>Họ và tên</th>
+            <td>
+                <input class="form-control" name="hoten" value="" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <th>Điện thoại</th>
+            <td>
+                <input class="form-control" name="dienthoai" value="" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input class="btn btn-info" name="dangnhap" value="Đăng ký" type="submit" />
+            </td>
+        </tr>
+    </table>
+</form>
+

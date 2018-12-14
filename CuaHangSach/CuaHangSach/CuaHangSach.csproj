@@ -178,8 +178,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuanLyKhachHangController.cs" />
     <Compile Include="Controllers\QuanLyLoaiController.cs" />
     <Compile Include="Controllers\QuanLySachController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
@@ -187,6 +190,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CheckGioHang.cs" />
     <Compile Include="Models\CHITIETHOADON.cs">
       <DependentUpon>CuaHangSach.tt</DependentUpon>
     </Compile>
@@ -315,6 +319,17 @@
     <Content Include="Views\QuanLySach\Details.cshtml" />
     <Content Include="Views\QuanLySach\Edit.cshtml" />
     <Content Include="Views\QuanLySach\Index.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\TrangChu\Test1.cshtml" />
+    <Content Include="Views\TrangChu\Test2.cshtml" />
+    <Content Include="Views\KhachHang\Index.cshtml" />
+    <Content Include="Views\KhachHang\DangNhap.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\Create.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\Delete.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\Details.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\Edit.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\Index.cshtml" />
+    <Content Include="Views\KhachHang\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

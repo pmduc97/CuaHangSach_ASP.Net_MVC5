@@ -1,0 +1,47 @@
+﻿@using CuaHangSach.Models;
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Đăng Nhập Khách Hàng</h2>
+<form action="" method="post">
+    @Html.AntiForgeryToken()
+    <table class="table table-bordered">
+        <tr>
+            <th>Tài khoản</th>
+            <td>
+                <input class="form-control" name="taikhoan" value="" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <th>Mật khẩu</th>
+            <td>
+                <input class="form-control" name="matkhau" value="" type="password" />
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input class="btn btn-info" name="dangnhap" value="Đăng Nhập" type="submit" />
+            </td>
+        </tr>
+    </table>
+</form>
+@{ 
+    if(ViewBag.KiemTra != null)
+    {
+        string kiemTra = ViewBag.KiemTra;
+        if (kiemTra.Equals("1"))
+        {
+            KHACHHANG kh = (KHACHHANG)Session["KhachHang"];
+            Output.WriteLine("Đăng nhập thành công");
+            Output.WriteLine("Xin chào: " + kh.TenKhachHang);
+        }
+        else
+        {
+            Output.WriteLine("Đăng nhập thất bại");
+        }
+    }
+}
+
