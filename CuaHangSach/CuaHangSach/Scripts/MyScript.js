@@ -38,9 +38,11 @@
 
 function checkSoLuong() {
 
-    var t = document.getElementById("soluong").value;
-    if (t <= 0) {
-        alert("Số lượng cần mua không hợp lệ");
-        return false;
+    var t = document.getElementsByClassName("soluong");
+    for (var i = 0; i < t.length; i++) {
+        if (t[i].value <= 0) {
+            alert("Số lượng cần mua không hợp lệ");
+            return false;
+        }
     }
 }
