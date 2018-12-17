@@ -60,6 +60,17 @@
     <Property Name="TacGia" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="NgayNhap" Type="date" Nullable="false" />
   </EntityType>
+  <EntityType Name="ThongTinDatHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SoDienThoai" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaKhachHang" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Loai" Type="int" Nullable="false" />
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_HienThiHoaDon">
@@ -130,6 +141,18 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ThongTinDatHang_KHACHHANG">
+    <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
+    <End Role="ThongTinDatHang" Type="Self.ThongTinDatHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="MaKhachHang" />
+      </Principal>
+      <Dependent Role="ThongTinDatHang">
+        <PropertyRef Name="MaKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CuaHangSachModelStoreContainer">
     <EntitySet Name="CHITIETHOADON" EntityType="Self.CHITIETHOADON" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
@@ -137,6 +160,7 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
     <EntitySet Name="LOAI" EntityType="Self.LOAI" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="QUANLY" EntityType="Self.QUANLY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SACH" EntityType="Self.SACH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThongTinDatHang" EntityType="Self.ThongTinDatHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="View_HienThiHoaDon" EntityType="Self.View_HienThiHoaDon" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [View_HienThiHoaDon].[TenSach] AS [TenSach], 
@@ -164,6 +188,10 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
     <AssociationSet Name="FK_SACH_LOAI" Association="Self.FK_SACH_LOAI">
       <End Role="LOAI" EntitySet="LOAI" />
       <End Role="SACH" EntitySet="SACH" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThongTinDatHang_KHACHHANG" Association="Self.FK_ThongTinDatHang_KHACHHANG">
+      <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+      <End Role="ThongTinDatHang" EntitySet="ThongTinDatHang" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

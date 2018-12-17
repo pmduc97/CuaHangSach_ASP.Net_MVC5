@@ -12,18 +12,15 @@ namespace CuaHangSach.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LOAI
+    public partial class ThongTinDatHang
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LOAI()
-        {
-            this.SACHes = new HashSet<SACH>();
-        }
+        public string HoTen { get; set; }
+        public string DiaChi { get; set; }
+        public string SoDienThoai { get; set; }
+        public string MaKhachHang { get; set; }
+        public int Loai { get; set; }
+        public long ID { get; set; }
     
-        public string MaLoai { get; set; }
-        public string TenLoai { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SACH> SACHes { get; set; }
+        public virtual KHACHHANG KHACHHANG { get; set; }
     }
 }

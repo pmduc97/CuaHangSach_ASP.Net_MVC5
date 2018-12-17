@@ -16,6 +16,8 @@
         <AssociationConnector Association="CuaHangSachModel.FK_CHITIETHOADON_SACH" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangSachModel.FK_HOADON_KHACHHANG" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangSachModel.FK_SACH_LOAI" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CuaHangSachModel.ThongTinDatHang" Width="1.5" PointX="3.5" PointY="9.125" />
+        <AssociationConnector Association="CuaHangSachModel.FK_ThongTinDatHang_KHACHHANG" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

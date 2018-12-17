@@ -32,5 +32,6 @@ namespace CuaHangSach.Models
         public virtual DbSet<QUANLY> QUANLies { get; set; }
         public virtual DbSet<SACH> SACHes { get; set; }
         public virtual DbSet<View_HienThiHoaDon> View_HienThiHoaDon { get; set; }
+        public virtual DbSet<ThongTinDatHang> ThongTinDatHangs { get; set; }
     }
 }

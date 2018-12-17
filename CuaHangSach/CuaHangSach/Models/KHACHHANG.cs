@@ -18,6 +18,7 @@ namespace CuaHangSach.Models
         public KHACHHANG()
         {
             this.HOADONs = new HashSet<HOADON>();
+            this.ThongTinDatHangs = new HashSet<ThongTinDatHang>();
         }
     
         public string MaKhachHang { get; set; }
@@ -31,5 +32,7 @@ namespace CuaHangSach.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThongTinDatHang> ThongTinDatHangs { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CuaHangSachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CuaHangSachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CHITIETHOADON">
           <Key>
             <PropertyRef Name="MaChiTietHoaDon" />
@@ -64,6 +64,17 @@
           <Property Name="Anh" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TacGia" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NgayNhap" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ThongTinDatHang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SoDienThoai" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaKhachHang" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Loai" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -135,6 +146,18 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ThongTinDatHang_KHACHHANG">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
+          <End Role="ThongTinDatHang" Type="Self.ThongTinDatHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKhachHang" />
+            </Principal>
+            <Dependent Role="ThongTinDatHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CuaHangSachModelStoreContainer">
           <EntitySet Name="CHITIETHOADON" EntityType="Self.CHITIETHOADON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
@@ -142,6 +165,7 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
           <EntitySet Name="LOAI" EntityType="Self.LOAI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QUANLY" EntityType="Self.QUANLY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SACH" EntityType="Self.SACH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongTinDatHang" EntityType="Self.ThongTinDatHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="View_HienThiHoaDon" EntityType="Self.View_HienThiHoaDon" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_HienThiHoaDon].[TenSach] AS [TenSach], 
@@ -170,9 +194,12 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
             <End Role="LOAI" EntitySet="LOAI" />
             <End Role="SACH" EntitySet="SACH" />
           </AssociationSet>
+          <AssociationSet Name="FK_ThongTinDatHang_KHACHHANG" Association="Self.FK_ThongTinDatHang_KHACHHANG">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="ThongTinDatHang" EntitySet="ThongTinDatHang" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CuaHangSachModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -212,6 +239,7 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QueQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
+          <NavigationProperty Name="ThongTinDatHangs" Relationship="CuaHangSachModel.FK_ThongTinDatHang_KHACHHANG" FromRole="KHACHHANG" ToRole="ThongTinDatHang" />
         </EntityType>
         <EntityType Name="LOAI">
           <Key>
@@ -336,7 +364,36 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
             <End Role="LOAI" EntitySet="LOAIs" />
             <End Role="SACH" EntitySet="SACHes" />
           </AssociationSet>
+          <EntitySet Name="ThongTinDatHangs" EntityType="CuaHangSachModel.ThongTinDatHang" />
+          <AssociationSet Name="FK_ThongTinDatHang_KHACHHANG" Association="CuaHangSachModel.FK_ThongTinDatHang_KHACHHANG">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="ThongTinDatHang" EntitySet="ThongTinDatHangs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ThongTinDatHang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="HoTen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaKhachHang" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loai" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="KHACHHANG" Relationship="CuaHangSachModel.FK_ThongTinDatHang_KHACHHANG" FromRole="ThongTinDatHang" ToRole="KHACHHANG" />
+        </EntityType>
+        <Association Name="FK_ThongTinDatHang_KHACHHANG">
+          <End Type="CuaHangSachModel.KHACHHANG" Role="KHACHHANG" Multiplicity="1" />
+          <End Type="CuaHangSachModel.ThongTinDatHang" Role="ThongTinDatHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKhachHang" />
+            </Principal>
+            <Dependent Role="ThongTinDatHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -420,6 +477,18 @@ warning 6002: The table/view 'CuaHangSach.dbo.View_HienThiHoaDon' does not have 
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
                 <ScalarProperty Name="SoLuongMua" ColumnName="SoLuongMua" />
                 <ScalarProperty Name="MaHoaDon" ColumnName="MaHoaDon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongTinDatHangs">
+            <EntityTypeMapping TypeName="CuaHangSachModel.ThongTinDatHang">
+              <MappingFragment StoreEntitySet="ThongTinDatHang">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

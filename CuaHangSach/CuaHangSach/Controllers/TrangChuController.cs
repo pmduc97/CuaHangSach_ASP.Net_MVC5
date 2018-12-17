@@ -27,7 +27,7 @@ namespace CuaHangSach.Controllers
             }
             else if(key != null && maloai == null)
             {
-                lstSach = lstSach.Where(p => p.TenSach.Contains(key)).OrderBy(x => x.TenSach).ToList();
+                lstSach = lstSach.Where(p => p.TenSach.ToLower().Contains(key.ToLower())).OrderBy(x => x.TenSach).ToList();
             }
             if (page == null) page = 1;
             int pageSize = 6;

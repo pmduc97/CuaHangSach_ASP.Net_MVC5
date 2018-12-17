@@ -36,6 +36,7 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="QueQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
+    <NavigationProperty Name="ThongTinDatHangs" Relationship="CuaHangSachModel.FK_ThongTinDatHang_KHACHHANG" FromRole="KHACHHANG" ToRole="ThongTinDatHang" />
   </EntityType>
   <EntityType Name="LOAI">
     <Key>
@@ -160,5 +161,34 @@
       <End Role="LOAI" EntitySet="LOAIs" />
       <End Role="SACH" EntitySet="SACHes" />
     </AssociationSet>
+    <EntitySet Name="ThongTinDatHangs" EntityType="CuaHangSachModel.ThongTinDatHang" />
+    <AssociationSet Name="FK_ThongTinDatHang_KHACHHANG" Association="CuaHangSachModel.FK_ThongTinDatHang_KHACHHANG">
+      <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+      <End Role="ThongTinDatHang" EntitySet="ThongTinDatHangs" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ThongTinDatHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="HoTen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoai" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaKhachHang" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Loai" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="KHACHHANG" Relationship="CuaHangSachModel.FK_ThongTinDatHang_KHACHHANG" FromRole="ThongTinDatHang" ToRole="KHACHHANG" />
+  </EntityType>
+  <Association Name="FK_ThongTinDatHang_KHACHHANG">
+    <End Type="CuaHangSachModel.KHACHHANG" Role="KHACHHANG" Multiplicity="1" />
+    <End Type="CuaHangSachModel.ThongTinDatHang" Role="ThongTinDatHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="MaKhachHang" />
+      </Principal>
+      <Dependent Role="ThongTinDatHang">
+        <PropertyRef Name="MaKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

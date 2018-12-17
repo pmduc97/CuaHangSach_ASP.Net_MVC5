@@ -17,36 +17,31 @@
     }
 <div class="row">
     <div class="col-md-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên sách</th>
-                    <th>Giá</th>
-                    <th>Số lượng mua</th>
-                </tr>
-            </thead>
+        <table class="table" style="">
             <tbody>
                 @foreach (SACH s in lstSach)
                 {
-                    <tr>
-                        <td>@i</td>
-                        <td>@s.TenSach</td>
-                        <td>@s.Gia</td>
-                        <td>
-                            <form class="form-inline" method="get" action="GioHang/CapNhat">
-                                <input name="soluong" style="width:70px; text-align:center;" type="number" value="@s.SoLuong" />
-                                <input name="masach" value="@s.MaSach" type="hidden" />
-                                <input name="capnhat" value="Cập nhật" type="submit" class="btn btn-sm btn-info" />
-                            </form>
-                            
-                        </td>
-                        <td>
-                            <form action="GioHang/Xoa" method="post">
-                                @Html.AntiForgeryToken()
-                                <input name="masach" value="@s.MaSach" type="hidden" />
-                                <input style="float:right;" name="xoa" value="Trả lại" class="btn btn-sm btn-danger" type="submit" />
-                            </form>
+                    <tr style="border-top: 1px solid black;">
+                        <td style="float:left; margin-top:33px; border:0px; font-weight:bold;">@i</td>
+                        <td style="float:left;"><img src="~/Image/Book/@s.Anh" style="width: 70px;height:80px;" /></td>
+                        <td style="float:left; width:80%;">
+                            <label>Tên sách&nbsp;:&nbsp;<b style="text-transform: uppercase; color: #CC0000; font-weight: bold;">@s.TenSach</b></label> 
+                            <br />
+                            <label>Giá bán&nbsp;&nbsp;&nbsp;:&nbsp;<b style="color:red;">@s.Gia VNĐ</b></label>
+                            <br />
+                            <div style="display: inline-flex;">
+                                <form class="form-inline" method="get" action="GioHang/CapNhat">
+                                    <label>Số lượng:</label>
+                                    <input name="soluong" id="soluong" style="width:70px; text-align:center;" type="number" value="@s.SoLuong" />
+                                    <input name="masach" value="@s.MaSach" type="hidden" />
+                                    <input name="capnhat" onclick="return checkSoLuong()" value="Cập nhật" type="submit" class="btn btn-sm btn-info" />
+                                </form>
+                                <form  action="GioHang/Xoa" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input name="masach" value="@s.MaSach" type="hidden" />
+                                    <input style="float:left; margin-left: 10px;" name="xoa" value="Trả lại" class="btn btn-sm btn-danger" type="submit" />
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     tongtien += s.Gia * s.SoLuong;
